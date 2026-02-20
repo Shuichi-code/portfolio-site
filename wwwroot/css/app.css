@@ -169,6 +169,8 @@ a:hover {
 .hero .container {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
 }
 
 .hero-photo {
