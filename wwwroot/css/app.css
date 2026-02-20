@@ -233,6 +233,17 @@ a:hover {
     line-height: 1.7;
 }
 
+.hero-availability {
+    display: inline-block;
+    font-size: 0.95rem;
+    color: var(--accent);
+    background-color: var(--card-blue);
+    border: 1px solid var(--border);
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+}
+
 .hero-cta {
     display: flex;
     justify-content: center;
