@@ -9,10 +9,13 @@ RUN dotnet restore
 COPY . .
 RUN dotnet publish -c Release -o /app/publish
 
-# Serve static output with nginx
-FROM nginx:alpine
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/publish/wwwroot /usr/share/nginx/html
+# Serve static output with a PORT-aware server for Railway
+FROM node:20-alpine
+WORKDIR /app
+RUN npm install -g serve
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+COPY --from=build /app/publish/wwwroot ./
+
+ENV PORT=8080
+EXPOSE 8080
+CMD ["sh", "-c", "serve -s /app -l tcp://0.0.0.0:${PORT:-8080}"]
