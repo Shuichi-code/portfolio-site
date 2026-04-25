@@ -4,18 +4,23 @@
 
 <TopNav />
 
-<main class="main-content">
-    <div class="container">
-        <Hero />
-    </div>
-    <ValueProposition />
+<main>
+    <Hero />
+    <About />
     <ProjectsSection />
     <Contact />
-    <Signature />
 </main>
 
-<footer class="footer">
-    <div class="container">
-        <p>&copy; @DateTime.Now.Year Erick Vanjoeff Misoles. All rights reserved.</p>
+<footer class="bg-cream-deep w-full mt-24 rounded-t-[3rem] border-t border-ink/5">
+    <div class="max-w-[110rem] mx-auto px-6 lg:px-16 xl:px-24 py-20 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+        <div>
+            <div class="font-display italic text-4xl text-ink mb-3" style="font-variation-settings: 'opsz' 144, 'SOFT' 100;">e<span class="text-accent">.</span>m</div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-mute">&copy; @DateTime.Now.Year &middot; Crafted with care &middot; .NET + Blazor</p>
+        </div>
+        <div class="flex flex-wrap gap-8 font-mono text-[10px] uppercase tracking-[0.3em]">
+            <a href="https://github.com/Shuichi-code" target="_blank" rel="noopener noreferrer" class="text-ink-mute hover:text-accent transition-colors">GitHub</a>
+            <a href="https://www.linkedin.com/in/erick-vanjoeff-misoles-23529246/" target="_blank" rel="noopener noreferrer" class="text-ink-mute hover:text-accent transition-colors">LinkedIn</a>
+            <a href="mailto:s_miso2000@live.com" class="text-ink-mute hover:text-accent transition-colors">Email</a>
+        </div>
     </div>
 </footer>

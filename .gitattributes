@@ -1,0 +1,24 @@
+# Default: detect text and normalize line endings on commit
+* text=auto
+
+# Force LF for source files so Windows checkouts don't churn the diff
+*.cs        text eol=lf
+*.csproj    text eol=lf
+*.razor     text eol=lf
+*.json      text eol=lf
+*.html      text eol=lf
+*.css       text eol=lf
+*.js        text eol=lf
+*.md        text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Treat as binary so git never tries to diff/normalize
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary

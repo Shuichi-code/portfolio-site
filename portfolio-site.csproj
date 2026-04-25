@@ -4,11 +4,42 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- Tailwind standalone CLI: pinned version + per-OS binary. Downloaded once per machine into obj/. -->
+    <TailwindVersion>v3.4.17</TailwindVersion>
+    <TailwindBinaryName Condition="'$(OS)' == 'Windows_NT'">tailwindcss-windows-x64.exe</TailwindBinaryName>
+    <TailwindBinaryName Condition="'$(OS)' != 'Windows_NT'">tailwindcss-linux-x64</TailwindBinaryName>
+    <TailwindBinary>$(BaseIntermediateOutputPath)$(TailwindBinaryName)</TailwindBinary>
+    <TailwindInput>Styles/tailwind.css</TailwindInput>
+    <TailwindOutput>wwwroot/css/tailwind.css</TailwindOutput>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.22" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.22" PrivateAssets="all" />
   </ItemGroup>
+
+  <Target Name="DownloadTailwind"
+          Inputs="$(MSBuildProjectFile)"
+          Outputs="$(TailwindBinary)">
+    <MakeDir Directories="$(BaseIntermediateOutputPath)" />
+    <DownloadFile
+      SourceUrl="https://github.com/tailwindlabs/tailwindcss/releases/download/$(TailwindVersion)/$(TailwindBinaryName)"
+      DestinationFolder="$(BaseIntermediateOutputPath)"
+      DestinationFileName="$(TailwindBinaryName)" />
+    <Exec Command="chmod +x &quot;$(TailwindBinary)&quot;" Condition="'$(OS)' != 'Windows_NT'" />
+  </Target>
+
+  <ItemGroup>
+    <TailwindSource Include="$(TailwindInput);tailwind.config.js;wwwroot/index.html;Components/**/*.razor;Pages/**/*.razor" />
+  </ItemGroup>
+
+  <Target Name="BuildTailwind"
+          DependsOnTargets="DownloadTailwind"
+          Inputs="@(TailwindSource)"
+          Outputs="$(TailwindOutput)"
+          BeforeTargets="BeforeBuild">
+    <Exec Command="&quot;$(TailwindBinary)&quot; -i &quot;$(TailwindInput)&quot; -o &quot;$(TailwindOutput)&quot; --minify" />
+  </Target>
 
 </Project>

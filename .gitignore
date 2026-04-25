@@ -54,3 +54,19 @@ node_modules/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Local agent / tooling scratch
+.claude/
+.playwright-mcp/
+.stitch/
+
+# Local screenshots / scratch images at repo root
+# (intentional images live under wwwroot/images/ — those still get tracked)
+/*.png
+/*.jpg
+/*.jpeg
+/*.gif
+/*.webp
+
+# Tailwind build output (compiled by MSBuild target before each build)
+wwwroot/css/tailwind.css

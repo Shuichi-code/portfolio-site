@@ -1,32 +1,61 @@
-<section id="projects" class="projects-section">
-    <h2 class="section-title">Projects</h2>
-    <div class="projects-grid">
-        <ProjectCard
-            Title="Sensei"
-            Tagline="AI-powered Socratic learning for developers"
-            Description="Adaptive learning platform that tests your true understanding through Socratic dialogue. Covers 7 domains with 236 topics, streak tracking, grading system, and custom curriculum generation from uploaded PDFs."
-            TechStack="@(new List<string> { ".NET 9", "Blazor", "PostgreSQL", "AI" })"
-            LiveUrl="https://codesensei-server-production.up.railway.app/" />
+<section class="bg-cream-soft py-32 px-6 lg:px-16 xl:px-24 scroll-mt-24" id="projects">
+    <div class="max-w-[110rem] mx-auto">
+        <div class="mb-20">
+            <div class="flex items-baseline gap-4 mb-6">
+                <span class="font-display text-accent text-5xl font-light leading-none" style="font-variation-settings: 'opsz' 144;">02</span>
+                <span class="h-px flex-1 bg-ink/15"></span>
+                <span class="font-mono text-xs uppercase tracking-[0.3em] text-ink-mute">Selected Works</span>
+            </div>
+            <h2 class="font-display text-[2.75rem] md:text-[3.5rem] leading-[1.05] font-medium text-ink tracking-[-0.02em]" style="font-variation-settings: 'opsz' 144, 'SOFT' 50;">Curated <em class="italic text-accent" style="font-variation-settings: 'opsz' 144, 'SOFT' 100;">digital artifacts</em>.</h2>
+        </div>
 
-        <ProjectCard
-            Title="ChordCraft"
-            Tagline="Gamified learning platform for the CharaChorder"
-            Description="Interactive training app for mastering the CharaChorder device. Features 160+ lessons across 5 phases, daily streaks, XP goals, unlockable badges, global leaderboards, and an interactive heatmap for tracking progress."
-            TechStack="@(new List<string> { ".NET 9", "Blazor", "PostgreSQL", "Tailwind CSS" })"
-            LiveUrl="https://chordcraft-api-production.up.railway.app/" />
+        <div class="space-y-24">
+            <ProjectCard
+                Number="i"
+                Title="Sensei"
+                Description="An AI-powered Socratic learning platform that tests what you actually know — across 236 topics in 7 domains, with adaptive grading, streak tracking, and curriculum generation from any PDF."
+                TechStack="@(new List<string> { ".NET 9", "Blazor", "PostgreSQL", "AI" })"
+                Category="AI"
+                CategoryColor="purple"
+                ScreenshotUrl="images/sensei.jpg"
+                LiveUrl="https://codesensei-server-production.up.railway.app/" />
 
-        <ProjectCard
-            Title="RequestVault"
-            Tagline="Lightweight API testing tool"
-            Description="Save, organize, and execute HTTP requests with history tracking and performance metrics. Features include response viewing, latency charts, dark mode, and keyboard shortcuts."
-            TechStack="@(new List<string> { "NestJS", "React", "TypeScript", "PostgreSQL", "Tailwind CSS" })"
-            GitHubUrl="https://github.com/Shuichi-code/RequestVault" />
+            <ProjectCard
+                Number="ii"
+                Title="ChordCraft"
+                Description="A gamified trainer for the CharaChorder — 160+ lessons across 5 phases with daily streaks, XP, badges, leaderboards, and an interactive heatmap of your slowest switches."
+                TechStack="@(new List<string> { ".NET 9", "Blazor", "PostgreSQL", "Tailwind CSS" })"
+                Category="Frontend"
+                CategoryColor="teal"
+                ScreenshotUrl="images/chordcraft.jpg"
+                LiveUrl="https://chordcraft-api-production.up.railway.app/"
+                ImageOnRight="true" />
+        </div>
 
-        <ProjectCard
-            Title="exchange-rates"
-            Tagline="Real-time exchange rate viewer"
-            Description="Displays daily exchange rate data from the Czech National Bank with searchable table and caching. Clean, focused utility application."
-            TechStack="@(new List<string> { ".NET 8", "Angular", "TypeScript" })"
-            GitHubUrl="https://github.com/Shuichi-code/exchange-rates" />
+        <div class="mt-32 mb-10 flex items-baseline gap-4">
+            <span class="h-px flex-1 bg-ink/15"></span>
+            <span class="font-mono text-xs uppercase tracking-[0.3em] text-ink-mute">Also on GitHub</span>
+            <span class="h-px flex-1 bg-ink/15"></span>
+        </div>
+
+        <div class="border-b border-ink/15">
+            <ToolCard
+                Number="iii"
+                Title="RequestVault"
+                Description="A lightweight API testing tool — save, organize, and execute HTTP requests with history tracking, latency charts, dark mode, and keyboard shortcuts."
+                TechStack="@(new List<string> { "NestJS", "React", "TypeScript", "PostgreSQL" })"
+                Category="Tooling"
+                CategoryColor="coral"
+                GitHubUrl="https://github.com/Shuichi-code/RequestVault" />
+
+            <ToolCard
+                Number="iv"
+                Title="exchange-rates"
+                Description="Daily exchange rate data from the Czech National Bank — searchable, cached, and built clean."
+                TechStack="@(new List<string> { ".NET 8", "Angular", "TypeScript" })"
+                Category="Open Source"
+                CategoryColor="blue"
+                GitHubUrl="https://github.com/Shuichi-code/exchange-rates" />
+        </div>
     </div>
 </section>

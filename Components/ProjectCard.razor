@@ -1,40 +1,96 @@
-<div class="project-card">
-    <h3 class="project-title">@Title</h3>
-    <p class="project-tagline">@Tagline</p>
-    <p class="project-description">@Description</p>
-    <div class="tech-stack">
-        @foreach (var tech in TechStack)
-        {
-            <span class="tech-pill">@tech</span>
-        }
-    </div>
-    <div class="project-links">
-        @if (!string.IsNullOrWhiteSpace(GitHubUrl))
-        {
-            <a href="@GitHubUrl" target="_blank" rel="noopener noreferrer" class="project-link github">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                </svg>
-                GitHub
-            </a>
-        }
-        @if (!string.IsNullOrEmpty(LiveUrl))
-        {
-            <a href="@LiveUrl" target="_blank" rel="noopener noreferrer" class="project-link live">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
-                </svg>
-                Live Demo
-            </a>
-        }
+<div class="group">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+        <div class="@(ImageOnRight ? "lg:col-span-7 lg:order-2" : "lg:col-span-7")">
+            <div class="relative aspect-video rounded-2xl overflow-hidden bg-cream-deep shadow-warm transition-transform duration-500 group-hover:-translate-y-2">
+                @if (!string.IsNullOrWhiteSpace(ScreenshotUrl))
+                {
+                    <img src="@ScreenshotUrl" alt="@Title screenshot" class="w-full h-full object-cover" />
+                }
+                else
+                {
+                    <div class="w-full h-full flex items-center justify-center">
+                        <span class="font-display italic text-9xl text-ink/10" style="font-variation-settings: 'opsz' 144, 'SOFT' 100;">@Title.Substring(0, 1)</span>
+                    </div>
+                }
+                @if (!string.IsNullOrWhiteSpace(LiveUrl) || !string.IsNullOrWhiteSpace(GitHubUrl))
+                {
+                    <div class="absolute inset-0 bg-ink/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="font-display italic text-cream text-2xl" style="font-variation-settings: 'opsz' 144, 'SOFT' 100;">view &rarr;</span>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="@(ImageOnRight ? "lg:col-span-5 lg:order-1 lg:pt-12" : "lg:col-span-5 lg:pt-12")">
+            <div class="flex items-baseline gap-3 mb-4">
+                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-mute">@Number</span>
+                <span class="h-px flex-1 bg-ink/15"></span>
+                @if (!string.IsNullOrWhiteSpace(Category))
+                {
+                    <span class="font-mono text-[10px] uppercase tracking-[0.3em] @CategoryClasses">@Category</span>
+                }
+            </div>
+
+            <h3 class="font-display text-5xl md:text-6xl font-medium text-ink group-hover:text-accent transition-colors mb-6 tracking-[-0.02em]" style="font-variation-settings: 'opsz' 144, 'SOFT' 50;">@Title<span class="text-accent">.</span></h3>
+
+            <p class="text-ink-soft text-base md:text-lg leading-relaxed mb-8">@Description</p>
+
+            <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-8 pb-6 border-b border-ink/10">
+                @for (int i = 0; i < TechStack.Count; i++)
+                {
+                    <span class="font-mono text-[11px] uppercase tracking-[0.15em] text-ink-mute">@TechStack[i]</span>
+                    @if (i < TechStack.Count - 1)
+                    {
+                        <span class="text-ink-mute/40">/</span>
+                    }
+                }
+            </div>
+
+            <div class="flex items-center gap-6">
+                @if (!string.IsNullOrWhiteSpace(LiveUrl))
+                {
+                    <a href="@LiveUrl" target="_blank" rel="noopener noreferrer" class="group/link font-display italic text-ink hover:text-accent inline-flex items-center gap-2 transition-colors" style="font-variation-settings: 'opsz' 36, 'SOFT' 100;">
+                        Live demo
+                        <svg class="w-4 h-4 transition-transform group-hover/link:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                }
+                @if (!string.IsNullOrWhiteSpace(GitHubUrl))
+                {
+                    <a href="@GitHubUrl" target="_blank" rel="noopener noreferrer" class="group/link font-display italic text-ink-mute hover:text-ink inline-flex items-center gap-2 transition-colors" style="font-variation-settings: 'opsz' 36, 'SOFT' 100;">
+                        GitHub
+                        <svg class="w-4 h-4 transition-transform group-hover/link:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                }
+            </div>
+        </div>
     </div>
 </div>
 
 @code {
     [Parameter] public string Title { get; set; } = "";
-    [Parameter] public string Tagline { get; set; } = "";
     [Parameter] public string Description { get; set; } = "";
     [Parameter] public List<string> TechStack { get; set; } = new();
     [Parameter] public string GitHubUrl { get; set; } = "";
-    [Parameter] public string? LiveUrl { get; set; }
+    [Parameter] public string LiveUrl { get; set; } = "";
+    [Parameter] public string ScreenshotUrl { get; set; } = "";
+    [Parameter] public string Category { get; set; } = "";
+    [Parameter] public string CategoryColor { get; set; } = "teal";
+    [Parameter] public bool ImageOnRight { get; set; } = false;
+    [Parameter] public string Number { get; set; } = "";
+
+    string CategoryClasses => CategoryColor switch
+    {
+        "teal" => "text-chip-tealfg",
+        "purple" => "text-chip-purplefg",
+        "coral" => "text-chip-coralfg",
+        "blue" => "text-chip-bluefg",
+        "green" => "text-chip-greenfg",
+        _ => "text-accent",
+    };
 }

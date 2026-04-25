@@ -1,0 +1,48 @@
+<a href="@GitHubUrl" target="_blank" rel="noopener noreferrer"
+   class="group block py-10 border-t border-ink/15 transition-all hover:border-accent">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-3 items-start">
+        <div class="md:col-span-3">
+            <div class="flex items-baseline gap-3 mb-2">
+                <span class="font-display italic text-3xl text-ink-mute group-hover:text-accent transition-colors" style="font-variation-settings: 'opsz' 144, 'SOFT' 100;">@Number</span>
+                <h3 class="font-display text-2xl font-medium text-ink group-hover:text-accent transition-colors" style="font-variation-settings: 'opsz' 144, 'SOFT' 30;">@Title</h3>
+            </div>
+            @if (!string.IsNullOrWhiteSpace(Category))
+            {
+                <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-mute ml-[3.25rem]">@Category</span>
+            }
+        </div>
+
+        <p class="md:col-span-5 text-ink-soft text-sm md:text-base leading-relaxed pt-1">@Description</p>
+
+        <div class="md:col-span-3 flex flex-wrap items-baseline gap-x-2 gap-y-1 pt-2">
+            @for (int i = 0; i < TechStack.Count; i++)
+            {
+                <span class="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-mute">@TechStack[i]</span>
+                @if (i < TechStack.Count - 1)
+                {
+                    <span class="text-ink-mute/40">/</span>
+                }
+            }
+        </div>
+
+        <div class="md:col-span-1 md:text-right pt-1">
+            <span class="font-display italic text-ink-mute group-hover:text-accent text-sm inline-flex items-center gap-1 transition-colors" style="font-variation-settings: 'opsz' 36, 'SOFT' 100;">
+                GitHub
+                <svg class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                </svg>
+            </span>
+        </div>
+    </div>
+</a>
+
+@code {
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string Description { get; set; } = "";
+    [Parameter] public List<string> TechStack { get; set; } = new();
+    [Parameter] public string GitHubUrl { get; set; } = "";
+    [Parameter] public string Category { get; set; } = "";
+    [Parameter] public string CategoryColor { get; set; } = "teal";
+    [Parameter] public string Number { get; set; } = "";
+}
